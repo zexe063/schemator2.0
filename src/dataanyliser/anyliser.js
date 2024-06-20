@@ -32,15 +32,17 @@ function Anyliser(){
 
 
 
-
   
     function valuegenerate(e){
        setObjData({...ObjData, [e.target.title]: e.target.value})
+       
     }
 
     function AddSubmit(id){
-      console.log(id)
+       
    dispatch(AddNodeValue({nodeid:id.nodeid,  value:{ id: id.id+1,...ObjData }}));
+
+
     }
 
     function  DeleteNodeData(id){
@@ -81,7 +83,7 @@ setColor(colorvalue.hex)
                                      return(
                                         <div key={nodeitem.id} className="flex w-full justify-evenly items-center gap-2 font-Dam-sans font-[10px]">
 
-                                       <input type=" text" value={nodeitem.key} contentEditable= "true" className=" w-auto border-[2px] border-solid border-blue-500 rounded-sm p-[1px] pl-1 text-[13px]"></input>
+                                       <input type=" text" value={nodeitem.key} contentEditable= "true" className=" w-auto border-[2px] border-solid border-blue-500 rounded-md p-[2px] pl-1 text-[13px]"></input>
                                     
                                        <select className=" text-[11px]" >
                                         <option value="String">{nodeitem.value}</option>
@@ -112,7 +114,7 @@ setColor(colorvalue.hex)
                                         <option value="Number">Number</option>
                                         <option value="Boolean">Boolean</option>
                                         <option value="Array">Array</option>
-                                        <option value="Object">Object.id</option>
+                                        <option value="Object">Object</option>
                                         <option value="timestamp">Timestamp</option>
                                         
                                        </select>
@@ -138,7 +140,7 @@ setColor(colorvalue.hex)
                 })
               }
                <button onClick={()=>dispatch(datashow(false))}>close</button>
-          </div> :  null
+          </div> : null
         }
         </>
     )

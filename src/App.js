@@ -7,21 +7,12 @@ import "./index.css"
 import draw from "./images/draw.png";
 import arrow from "./images/arrow.png";
 import nodetype from './nodetype';
-import { setNode, AddNewNode, RedoNode } from './nodereducer/nodeSlice';
+import { setNode, AddNewNode, RedoNode,setEdges } from './nodereducer/nodeSlice';
 import { useSelector, useDispatch} from 'react-redux';
 import EdgeLine from './edgesType/edgesType';
 import Anyliser from './dataanyliser/anyliser';
-
-
 import hljs from 'highlight.js';
 import 'highlight.js/styles/stackoverflow-light.min.css';
-
-
-
-
-
-
-
 import SimpleFloatingEdge from './SimpleFloatingEdge';
 import { combineSlices } from '@reduxjs/toolkit';
 import { IoMdBatteryCharging, IoMdReturnLeft } from 'react-icons/io';
@@ -38,13 +29,17 @@ function Flow() {
   console.log()
   const highlight =useRef(null);
   
-  useEffect(()=>{
-    hljs.highlightAll(highlight.current);
-  })
+ 
 
   const dispatch =  useDispatch()
   const nodes = useSelector((state)=> state.nodes.Nodes);
+  const edges  =  useSelector((state)=> state.nodes.Edges);
  const Nodeedgetype = useSelector((state)=>state.nodes.connectionType);
+ console.log(edges)
+
+//  useEffect(()=>{
+//   hljs.highlightAll(highlight.current);
+// },[nodes])
 
  let shechmafinalresult  = ''
   
@@ -58,14 +53,14 @@ function Flow() {
 const   datatype =  item.data.arr.forEach((nodeitem)=>{
        value =  value  + 
        `
-       ${nodeitem.key}:    ${nodeitem.value},
+       ${nodeitem.key}: {type: ${nodeitem.value}},
        `
       
 })   
 
 
 
-const SchemaGenerate = `const ${schemaLable}Schema= {(
+const SchemaGenerate = `const ${schemaLable}Schema= new mongoose.schema{(
    ${value}
 )}` 
 
@@ -85,8 +80,9 @@ return SchemaGenerate;
 
   
   const intialedges = [];
-  const [edges, setEdges] = useState(intialedges)
+  // const [edges, setEdges] = useState(intialedges)
 
+ 
   
 // here the nodes
 
@@ -108,9 +104,9 @@ const onNodesChange =  useCallback((changes)=>{
  
 })
     
-const  onEdgesChange = useCallback((changes)=>{
-  setEdges((eds)=> applyEdgeChanges(changes,eds))
-})
+// const  onEdgesChange = useCallback((changes)=>{
+//   setEdges((eds)=> applyEdgeChanges(changes,eds))
+// })
 
   // here onconnect edge functionality
   const onConnect = useCallback(
@@ -118,15 +114,25 @@ const  onEdgesChange = useCallback((changes)=>{
 
       let floatedge = "floating"
       if(ConnectionLineType[Nodeedgetype] === ConnectionLineType.Bezier){
+        
     floatedge = "floating"
       }
       else{
       floatedge = ConnectionLineType[Nodeedgetype]
       }
         
-        setEdges((nds)=>{
-        return addEdge({...params, type:floatedge, markerEnd:{type:MarkerType.ArrowClosed, color:"black"}, style:{strokeWidth:2, stroke:"black" }, }, nds)
-      })
+      //   setEdges((nds)=>{
+          
+      //   // return addEdge({...params, type:floatedge, markerEnd:{type:MarkerType.ArrowClosed, color:"black"}, style:{strokeWidth:2, stroke:"black" }, }, nds)
+         
+        
+
+      // })
+
+
+      const edge = addEdge({...params, type:floatedge, markerEnd:{type:MarkerType.ArrowClosed, color:"black"}, style:{strokeWidth:2, stroke:"black" }, }, edges);
+      dispatch(setEdges(edge))
+           
     },
   
     [Nodeedgetype],
@@ -172,34 +178,14 @@ function move(event){
   return (
     <div>
 
-    <div style={{width: '80vw', height:'100vh' }}>
+    <div style={{width: '100vw', height:'100vh' }}>
     
     <EdgeLine></EdgeLine>
-    <div className=" font-Dam-sans text-[15px] w-[320px]  h-[700px] overflow-y-auto  bg-white shadow-lg rounded-sm absolute right-0  top-[40px] " >
-      {
-schema.map((item)=>{
-  
-   return <pre className=' font-Dam-sans pl-4 flex flex-col gap-3 w-full' >
-    <code ref={highlight} className='  font-Dam-sans '>
-      {item}
-    </code>
-   </pre>
-  
-})
-        
-      }
     
 
-
- 
-
-
-      
-    </div>
-
-     <ReactFlow 
+     <ReactFlow className = "reactflow"
      onNodesChange={onNodesChange}  
-      onEdgesChange={onEdgesChange} 
+       
       onConnect={onConnect} 
       connectionLineType={ConnectionLineType[Nodeedgetype]}
       edges={edges}

@@ -13,10 +13,19 @@ export const setNode = createAsyncThunk(
     }
 );
 
+export const setEdges = createAsyncThunk(
+    "node/onEdgeChnage",
+    async(data)=>{
+        console.log(data)
+ return data;
+    }
+)
+
 export const edgetype  = createAsyncThunk(
 
     "node/edgetype", 
     async(data1)=>{
+
         return data1;
     }
 )
@@ -25,7 +34,7 @@ export const edgetype  = createAsyncThunk(
 export const datashow = createAsyncThunk(
     "node/anylisher",
     async(data)=>{
-        console.log(data)
+       
          return data;
     }
 )
@@ -108,19 +117,43 @@ const node = createSlice({
             state.NodeId = action.payload.NodeId;;
              state.Nodes = action.payload.data
           })
+
+          builder.addCase(setEdges.fulfilled, (state,action)=>{
+          state.Edges.push(...action.payload)
+          })
       
            builder.addCase(edgetype.fulfilled, (state,action)=>{
             
                state.connectionType = action.payload;
            })
+
        
            builder.addCase(AddNodeValue.fulfilled, (state,action)=>{
-              const {nodeid,id, value}  = action.payload;
-      
+              const {nodeid, value}  = action.payload;
+              const id = state.Nodes.length+1;
+
+               
               const nodedata = state.Nodes.forEach((node)=>{
-                  if(node.id ===  nodeid){
-                 node.data.arr.push(value);
-                  }
+                const childNode = {id:`${id}`,type:"custom", position:{x:0, y:0}, data:{color:"#612a35",arr:[], label:`${value.key}`}, parentNode:`${node.id}`};
+
+                const childEdge = {source:`${node.id}`, target: `${id}`, type:"floating", animated:true}
+
+                if(node.id === nodeid){
+
+               if(value.value === "Object"){
+                node.data.arr.push(value);
+                  state.Nodes.push(childNode)
+                  state.Edges.push(childEdge)
+                  
+                  
+                
+               }else{
+                    node.data.arr.push(value);
+               }
+                }
+
+                
+    
               })
            })
       

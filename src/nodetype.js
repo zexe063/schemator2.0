@@ -11,9 +11,12 @@ const dispatch = useDispatch()
 
   function tester(e){
     
+    console.log(id)
     e.stopPropagation()
      dispatch(datashow(true))
      dispatch(nodesdatashow(id))
+  const elemenet = e.target.getBoundingClientRect();
+  console.log(elemenet.top, elemenet.left, elemenet.right, elemenet.bottom)
   }
 
 
@@ -68,10 +71,11 @@ const dispatch = useDispatch()
     <Handle id='c' type='target' position={Position.Bottom} ></Handle> */}
  
       
- <Handle type="source" position={Position.Top} id="a" />
-      <Handle type="source" position={Position.Right} id="b" />
-      <Handle type="source" position={Position.Bottom} id="c" />
-      <Handle type="source" position={Position.Left} id="d" />
+ <Handle type="source" position={Position.Top}  id="a" />
+      <Handle type="source" position={Position.Right}  id="b" />
+      <Handle type="source" position={Position.Bottom}  id="c" />
+      <Handle type="source" position={Position.Left}   id="d" />
+    
     </div>
     
   );

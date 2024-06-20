@@ -4,6 +4,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
+html body div{
+  font-family: Inter var, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.reactflow-node {
+  transition: transform 0.2s ease-in-out; 
+}
 
 .simple-floatingedges {
     flex-direction: column;

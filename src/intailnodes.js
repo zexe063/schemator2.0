@@ -112,42 +112,9 @@ import { Position } from "reactflow";
   
     ]}},
 
-    { id:"23",sourcePosition: 'right',
-    targetPosition: 'left', type:"custom",position:{x:1, y:200},data:{id:"4", color:"#21a935",  icon:<MdSubscriptions /> ,label: "user", arr:[
+    
   
-      {key:"subscription", value:"Boolen"},
-      {key:"timestamp", value:"DateTime"},
-      {key:"account_id", value:"Id"},
-      {key:"account_name", value:"String"}
-  
-    ]}},
-    { id:"4000",sourcePosition: 'right',
-    targetPosition: 'left', type:"custom",position:{x:1, y:200},data:{id:"4", color:"#21a935",  icon:<MdSubscriptions /> ,label: "Subscription", arr:[
-  
-      {key:"subscription", value:"Boolen"},
-      {key:"timestamp", value:"DateTime"},
-      {key:"account_id", value:"Id"},
-      {key:"account_name", value:"String"}
-  
-    ]}},
-    { id:"400",sourcePosition: 'right',
-    targetPosition: 'left', type:"custom",position:{x:1, y:200},data:{id:"4", color:"#21a935",  icon:<MdSubscriptions /> ,label: "Subscription", arr:[
-  
-      {key:"subscription", value:"Boolen"},
-      {key:"timestamp", value:"DateTime"},
-      {key:"account_id", value:"Id"},
-      {key:"account_name", value:"String"}
-  
-    ]}},
-    { id:"40",sourcePosition: 'right',
-    targetPosition: 'left', type:"custom",position:{x:1, y:200},data:{id:"4", color:"#21a935",  icon:<MdSubscriptions /> ,label: "Subscription", arr:[
-  
-      {key:"subscription", value:"Boolen"},
-      {key:"timestamp", value:"DateTime"},
-      {key:"account_id", value:"Id"},
-      {key:"account_name", value:"String"}
-  
-    ]}},
+   
 
     
 
