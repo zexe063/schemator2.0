@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NodeDataColor, datashow } from "../nodereducer/nodeSlice";
 import { useEffect, useState } from "react";
-import { AddNodeValue, DeleteNodeValue} from "../nodereducer/nodeSlice";
-import {SketchPicker} from "react-color"
-import { MdDelete } from "react-icons/md";
+import { AddNodeValue, DeleteNodeValue,NodeFieldValueUpdate} from "../nodereducer/nodeSlice";
+import {SketchPicker,CirclePicker} from "react-color"
+import { MdDelete} from "react-icons/md";
 
+
+import "./alylisher.css"
 
 function Anyliser(){
 
@@ -60,12 +62,16 @@ setColor(colorvalue.hex)
   console.log("colordata")
  }
     
+ function NodeFieldValue(data){
+dispatch(NodeFieldValueUpdate(data));
+
+ }
    
    
     return(
         <>
         {
-              Anylisershow ? <div className=" w-[320px] h-[700px]  bg-white shadow-lg rounded-sm absolute right-0  top-[40px]">
+              Anylisershow ? <div className=" w-[320px] min-h-screen max-h-auto bg-background_black  absolute right-0  top-[52px]  border-l-[1px] border-solid   border-border_color ">
               {
                 NewschemaNode && NewschemaNode.map((item,i)=>{
                     return(
@@ -74,6 +80,7 @@ setColor(colorvalue.hex)
                               <div key={i} className="flex justify-between items-center">
                               
                                         <div>{item.data.label}</div>
+                                        
                                         </div>
                                      
                              {
@@ -81,11 +88,11 @@ setColor(colorvalue.hex)
                                 item.data.arr && item.data.arr.map((nodeitem)=>{    
                                
                                      return(
-                                        <div key={nodeitem.id} className="flex w-full justify-evenly items-center gap-2 font-Dam-sans font-[10px]">
+                                        <div key={nodeitem.id} className="flex w-full justify-evenly items-center gap-2 font-Open-Sans text-input_text_color font-[10px]">
 
-                                       <input type=" text" value={nodeitem.key} contentEditable= "true" className=" w-auto border-[2px] border-solid border-blue-500 rounded-md p-[2px] pl-1 text-[13px]"></input>
+                                       <input type="text" defaultValue={nodeitem.key}   className=" w-auto  bg-transparent border-[1px] border-solid  border-border_color  pl-1 text-[12px] focus:border-[1px] focus:border-solid focus:border-blue-800" onChange={(e)=>NodeFieldValue({Parentid:item.id,key:e.target.value,Childid:nodeitem.id})}></input>
                                     
-                                       <select className=" text-[11px]" >
+                                       <select className=" text-[11px] bg-background_black" >
                                         <option value="String">{nodeitem.value}</option>
                                         <option value="Number">Number</option>
                                         <option value="Boolean">Boolean</option>
@@ -105,11 +112,11 @@ setColor(colorvalue.hex)
 
                                <p className=" text-center font-Dam-sans ">NodeAdder</p>
 
-                           <div className=" flex w-full gap-2 justify-evenly items-center font-Dam-sans">
+                           <div className=" flex w-full gap-2 justify-evenly items-center text-input_text_color font-Dam-sans">
 
-                            <input type="text" placeholder="key" title="key" className=" w-auto border-[2px] border-solid border-blue-500 rounded-sm p-[1px] pl-1 text-[13px]"onChange={valuegenerate}></input>
+                            <input type="text" placeholder="key"  title="key" className=" w-auto bg-transparent border-[1px] border-solid border-border_color p-[1px] pl-1 text-[13px]"onChange={valuegenerate}></input>
                           
-                                     <select className=" text-[11px]" title="value" defaultValue="String" onClick={valuegenerate}>
+                                     <select className=" bg-background_black text-[11px] text-input_text_color" title="value" defaultValue="String" onClick={valuegenerate} >
                                         <option value="String">String</option>
                                         <option value="Number">Number</option>
                                         <option value="Boolean">Boolean</option>
@@ -123,13 +130,13 @@ setColor(colorvalue.hex)
                            </div>
                            <div className=" bg-stone-500 w-full h-[2px] mt-3"></div>
 
-                           <div  className=" mt-2  w-full flex  gap-3  pl-2 items-center font-Dam-sans">
+                           <div  className=" mt-2  w-full flex flex-col  text-input_text_color gap-3  pl-2 items-center font-Open-Sans">
 
-                            <input type="text" placeholder="color" className="  w-auto border-[2px] border-solid border-blue-500 rounded-sm p-[1px] pl-1 text-[13px]"  value={color}  id="color"></input>
+                            <input type="text" placeholder="color" className="  w-auto border-[1px] bg-transparent border-solid border-border_color  p-[1px] pl-1 text-[12px]"  value={color}  id="color"></input>
                             
 
-                            <div className=" w-[30px]  h-[30px]  rounded-full" style={{backgroundColor:`${color}`}} >
-                              <SketchPicker onChange={colorchanager} onClick={colorvalue}></SketchPicker>
+                            <div>
+                              <CirclePicker onChange={colorchanager} onClick={colorvalue}></CirclePicker>
                             </div>
 
                            </div>

@@ -4,50 +4,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
-html body div{
-  font-family: Inter var, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-.reactflow-node {
-  transition: transform 0.2s ease-in-out; 
-}
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+/* html body div{
+  font-family: Inter var, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Helvetica, Ubuntu, Roboto, Noto, Arial, sans-serif
+} */
 
-.simple-floatingedges {
-    flex-direction: column;
-    display: flex;
-    flex-grow: 1;
-    height: 100%;
-  }
-  
-  .simple-floatingedges .react-flow__handle {
-    width: 8px;
-    height: 8px;
-    background-color: #bbb;
-  }
-  
-  .simple-floatingedges .react-flow__handle-top {
-    top: -15px;
-  }
-  
-  .simple-floatingedges .react-flow__handle-bottom {
-    bottom: -15px;
-  }
-  
-  .simple-floatingedges .react-flow__handle-left {
-    left: -15px;
-  }
-  
-  .simple-floatingedges .react-flow__handle-right {
-    right: -15px;
-  }
-  
-  .simple-floatingedges .react-flow__node-custom {
-    background: #fff;
-    border: 1px solid #1a192b;
-    border-radius: 3px;
-    color: #222;
-    font-size: 12px;
-    padding: 10px;
-    text-align: center;
-    width: 150px;
-  }
-  
+html, body{
+ margin: 0;
+ padding: 0;
+ /* overflow: hidden; */
+} 
