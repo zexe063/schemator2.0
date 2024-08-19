@@ -4,8 +4,8 @@ function  Price(){
     return(
         <div className=" card2">
         <div className="header">
-          <p>Pricing</p>
-          <div>Plan For Unlock More Schema features</div>
+          <p className=" mt-4">Pricing</p>
+          <div className=" text-center text-[15px]">Plan For Unlock More Schema features</div>
         </div>
         <div className="card_patelets">
           <div className="card" style={{boxShadow: '25,25px, 50px, -12px  rgba(0, 0, 0 , 0.25)'}}>

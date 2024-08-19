@@ -16,7 +16,7 @@
       position: relative;
       width: 100%;
       min-height: 686px;
-      flex-wrap: nowrap;
+    
       
       background-color: #fff;
       border-radius: 15px;
@@ -39,6 +39,7 @@ letter-spacing: 0.3px;
     }
 .card2 .header p{
     position: relative;
+    top: 10px;
     color: #4f46e5;
     font-weight: 600px;
     font-weight: bold;
@@ -57,7 +58,8 @@ letter-spacing: 0.3px;
     position: relative;
     width: 100%;
  height: 80%;
-
+display: flex;
+flex-wrap: wrap;
  margin-top: 30px;
  display: flex;
  gap: 10px;
