@@ -12,20 +12,7 @@ import code2 from "../images/code2.png"
 
 function Header() {
   return (
-  //   <header className="  fixed w-full top-0  font-Inter">
-  //     <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-  //       <div className="font-Dam-sans text-3xl text-transparent  bg-clip-text bg-gradient-to-r from-design_color  via-forward_color to-forward_color">Schemator</div>
-  //       <div className="space-x-4 text-white font-Dam-sans">
-  //         <a href="#features" className="text-white hover:text-indigo-600 transition duration-300">Features</a>
-        
-  //         <a href="#pricing" className="text-white hover:text-indigo-600 transition duration-300">Pricing</a>
-  //         <NavLink to={"/workshop"} className="bg-white text-neutral-800 px-4 py-2 rounded font-Dam-sans transition duration-300 ">Get Started</NavLink>
-      
-  //         <NavLink to={"/signup"} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300 font-Dam-sans">Signup</NavLink>
-  //       </div>
-  //     </nav>
-  //   </header>
-  // );
+  
   <header className="fixed w-full top-0 font-Inter">
   <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
     <div className="font-Dam-sans text-3xl text-transparent bg-clip-text bg-gradient-to-r from-design_color via-forward_color to-forward_color">
@@ -139,8 +126,11 @@ function Demo() {
         <img src={code} alt="Schemator Demo" className="mx-auto rounded-lg shadow-lg" />
       </div>
     </section>
-  );
+
+  )
 }
+
+
 
 function Demo2() {
     return (
@@ -251,8 +241,7 @@ function Homepage() {
       <Hero />
       <Demo />
       <Demo2></Demo2>
-      {/* <Features /> */}
-      {/* <HowItWorks /> */}
+  
      
    
       <Testimonials />

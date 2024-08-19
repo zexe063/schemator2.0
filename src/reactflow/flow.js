@@ -216,7 +216,7 @@ function move(event){
   </div>
   
 
-  <div   style={{width:"100vw", height:"100vh", position:"relative", top:"50px", left:"0px"}}>
+  <div   style={{width:"100vw", height:"100vh", position:"relative", top:"50px", left:"0px", overflow:"hidden"}}>
 
      <ReactFlow style={{width: '100%', height:'100%', backgroundColor:"#1c1e24", } }
 

@@ -118,11 +118,11 @@ dispatch(SchemaElementSuffle(...result))
     return(
         <div>
         {
-              Anylisershow ? <div className=" w-[320px] min-h-screen max-h-auto bg-background_black  absolute right-0  top-[50px]  border-l-[1px] border-solid   border-border_color ">
+              Anylisershow ? <div id="anylisher" className=" w-[320px] h-[calc(100%-50px)]  bg-background_black scroll-smooth overflow-y-auto  absolute right-0  top-[50px]  border-l-[1px] border-solid   border-border_color ">
                { 
                  
                   NewschemaNode && NewschemaNode.map((item,i)=>{
-                      return(
+                      return( 
                           <div  className="flex flex-col justify-between items-center gap-2 p-2" key={i}>
   
                                 <div key={i} className="flex justify-between items-center">

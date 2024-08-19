@@ -38,9 +38,9 @@ setOpen((prev)=> ({...prev, [foldername]: !prev[foldername]}))
   }
   
     return(
-        <div id="project" className=" w-[270px] z-larger h-[100%] absolute top-[50px]  overflow-y-auto  left-0   shadow-background_black bg-background_black  border-solid border-r-[1px] border-border_color text-white">
+        <div id="project" className=" w-[270px] z-larger h-[calc(100%-50px)] absolute top-[50px]  overflow-y-auto   left-0   shadow-background_black bg-background_black  border-solid border-r-[1px] border-border_color text-white">
           
-          <div className=" mt-8">
+          <div className=" mt-8 ">
           {
             
             
