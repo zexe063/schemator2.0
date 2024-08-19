@@ -76,7 +76,7 @@ function AiSchema(){
 }
   
 return (
-    <div className='flex w-full'>
+    <div className='flex w-full   absolute top-0 left-0  bg-background_black'>
 
     <div className=' flex w-full gap-7 justify-center items-center h-[50px] shadow-sm  border-[1px] border-solid border-border_color'>
 

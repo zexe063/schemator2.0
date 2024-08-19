@@ -124,4 +124,4 @@ import { Position } from "reactflow";
 
   ]
   
-    export default intailnodes;
+    // export default intailnodes;

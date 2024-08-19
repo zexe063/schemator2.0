@@ -14,7 +14,7 @@ function  Price(){
               <p className="meta">This is For Student Checkout</p>
             </div>
             <div className="price">
-              <span className="dollor">$5</span>
+              <span className="dollor">₹399</span>
               <span className="month">/month</span>
             </div>
             <div className=" button">
@@ -35,7 +35,7 @@ function  Price(){
               <p className="meta">It save your  time and faster your schema code</p>
             </div>
             <div className="price">
-              <span className="dollor" style={{color: 'white'}}>$10</span>
+              <span className="dollor" style={{color: 'white'}}>₹799</span>
               <span className="month">/month</span>
             </div>
             <div className=" button">
@@ -54,12 +54,11 @@ function  Price(){
           </div>
           <div className="card">
             <div className="card_header">
-              <p className="basic">Professional</p>
+              <p className="basic">Custom</p>
               <p className="meta">This is For Student Checkout</p>
             </div>
             <div className="price">
-              <span className="dollor">$20</span>
-              <span className="month">/month</span>
+              
             </div>
             <div className=" button">
               <div><span>Buy Plan</span></div>

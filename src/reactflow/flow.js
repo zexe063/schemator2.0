@@ -1,14 +1,12 @@
 
 
 import { useState,useCallback,useMemo, useEffect, useRef } from 'react';
-import ReactFlow, { Controls, Background, applyNodeChanges,   applyEdgeChanges,addEdge,ConnectionLineType,node,MarkerType, Position, updateEdge, ConnectionMode, StraightEdge, BackgroundVariant, MiniMap, Panel, useReactFlow, ReactFlowProvider, useViewport} from 'reactflow';
+import ReactFlow, { Controls, Background, applyNodeChanges,   applyEdgeChanges,addEdge,ConnectionLineType,MarkerType, Position, updateEdge, ConnectionMode, StraightEdge, BackgroundVariant, MiniMap, Panel, useReactFlow, ReactFlowProvider, useViewport} from 'reactflow';
 import 'reactflow/dist/style.css';
 
 import "./flow.css"
 
 
-import draw from "./images/draw.png";
-import arrow from "./images/arrow.png";
 import nodetype from './nodetype';
 import { setNode, AddNewNode, RedoNode,setEdges } from './nodereducer/nodeSlice';
 import { useSelector, useDispatch} from 'react-redux';
@@ -20,6 +18,9 @@ import SimpleFloatingEdge from './SimpleFloatingEdge';
 import StarightFloatingEdges from './StarightFloatingEdges';
 import NodeElementpopup from './nodeElementpopup/nodeElementpopup';
 import ProjectPanel from './projectpanel/projectpanel';
+import dagre from "dagre"
+import { FaSearch, FaSlash } from 'react-icons/fa';
+
 
 
 
@@ -45,45 +46,52 @@ function Flow() {
   const nodes = useSelector((state)=> state.nodes.Nodes);
   const edges  =  useSelector((state)=> state.nodes.Edges);
  const Nodeedgetype = useSelector((state)=>state.nodes.connectionType);
-console.log(nodes)
+
+
+
+
+
+
+
+
+ 
+
+  
+
+
 
 //  useEffect(()=>{
 //   hljs.highlightAll(highlight.current);
-// },[nodes])
+// },[layoutedNodes])
 
  let shechmafinalresult  = ''
   
 // here  the scehma agenerate 
-  const schema =  nodes.map((item) => {
+//   const schema =  nodes.map((item) => {
    
       
-    let value = ''
-    const schemaLable = item.data.label;
+//     let value = ''
+//     const schemaLable = item.data.label;
     
-const   datatype =  item.data.arr.forEach((nodeitem)=>{
-       value =  value  + 
-       `
-       ${nodeitem.key}: {type: ${nodeitem.value}},
-       `
+// const   datatype =  item.data.arr.forEach((nodeitem)=>{
+//        value =  value  + 
+//        `
+//        ${nodeitem.key}: {type: ${nodeitem.value}},
+//        `
       
-})   
+// })   
 
-const SchemaGenerate = `const ${schemaLable}Schema= new mongoose.schema{(
-   ${value}
-)}` 
+// const SchemaGenerate = `const ${schemaLable}Schema= new mongoose.schema{(
+//    ${value}
+// )}` 
 
-return SchemaGenerate;
+// return SchemaGenerate;
 
-  });
+//   });
 
   
 
-  const intialedges = [];
-  // const [edges, setEdges] = useState(intialedges)
-
- 
   
-// here the nodes
 
 const nodeTypes = useMemo(
   () => ({
@@ -92,14 +100,14 @@ const nodeTypes = useMemo(
   [],
 );
 
-// here the nodes changes function 
+// here the Nodes changes function 
  
 const onNodesChange =  useCallback((changes)=>{
 
 
-  const updatenodes = applyNodeChanges(changes,nodes);
+  const updatelayoutedNodes = applyNodeChanges(changes,nodes);
   
-  dispatch(setNode({data:updatenodes, NodeId:changes}))
+  dispatch(setNode({data:updatelayoutedNodes, NodeId:changes}))
  
 })
     
@@ -125,10 +133,12 @@ const onNodesChange =  useCallback((changes)=>{
       flowedge=  "StraightEdge"
      }
 
+     
+     
    
      
      
-      const edge = addEdge({...params, type:flowedge,  style:{strokeWidth:1.5, stroke:"white" },}, edges);
+      const edge = addEdge({...params, type:flowedge,style:{strokeWidth:1, stroke:"white" },},edges);
       dispatch(setEdges(edge))
            
     },
@@ -165,7 +175,7 @@ const onDrop = useCallback((event)=>{
     id:`${nodes.length+1}`,
     type:"custom",
     position: postion,
-    data:{id:`${nodes.length+1}`,NodeElementpopup:false, color:"#0073ff", label:`collection${nodes.length}` ,arr:[{key:"_id", value:"Objectid"}]},
+    data:{id:`${nodes.length+1}`,NodeElementpopup:false, show:true, color:"#0073ff", label:`collection${nodes.length}` ,arr:[{ id:"1", key:"_id", value:"ObjectId"}]},
     
   }
 
@@ -194,36 +204,43 @@ function move(event){
   return (
     
    
-     <div style={{width: '100vw', height:'100vh', backgroundColor:"#1c1e24"}}> 
+     <div className=' flex justify-center items-center'> 
 
-    <EdgeLine></EdgeLine>
-    
-  {/* <ProjectPanel></ProjectPanel> */}
+<div>
+<EdgeLine></EdgeLine>
+</div>
 
-     <ReactFlow style={{width: '100%', height:'100%', backgroundColor:"#1c1e24",   }}
-     onNodesChange={onNodesChange}  
-     
-       
     
+<div>
+  <ProjectPanel></ProjectPanel>
+  </div>
+  
+
+  <div   style={{width:"100vw", height:"100vh", position:"relative", top:"50px", left:"0px"}}>
+
+     <ReactFlow style={{width: '100%', height:'100%', backgroundColor:"#1c1e24", } }
+
+    onNodesDelete={onNodesDelete}
       onConnect={onConnect} 
       connectionLineType={ConnectionLineType[Nodeedgetype]}
+      onNodesChange={onNodesChange}
+      nodes={nodes}
       edges={edges}
-       nodes={nodes} 
+
         nodeTypes={nodeTypes}  
         edgeTypes={edgeTypes}
         connectionMode={ConnectionMode.Loose}
          connectionLineStyle={{strokeWidth:2, stroke:"white"}}
          onInit={setRfinstance}
-      
-       minZoom={0.5}
-      
+     fitView
+       minZoom={0}
+      elevateEdgesOnSelect
       onDragOver={onDragOver}
          onDrop={onDrop}
-         onNodesDelete={onNodesDelete}
+      
       
     
-        fitView
-         
+               
           >
           
       
@@ -231,9 +248,10 @@ function move(event){
 
        
         {/* <MiniMap></MiniMap> */}
-        {/* <Controls /> */}
+        <Controls />
         
       </ReactFlow>
+      </div>
       
       <Anyliser></Anyliser>
     </div>

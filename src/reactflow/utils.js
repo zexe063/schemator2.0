@@ -5,6 +5,7 @@ function getParams(nodeA, nodeB) {
   const centerA = getNodeCenter(nodeA);
   const centerB = getNodeCenter(nodeB);
 
+ 
   const horizontalDiff = Math.abs(centerA.x - centerB.x);
   const verticalDiff = Math.abs(centerA.y - centerB.y);
 
