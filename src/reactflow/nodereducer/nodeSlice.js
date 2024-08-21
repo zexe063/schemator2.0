@@ -309,8 +309,12 @@ const node = createSlice({
        state.NodeData[0].data .arr = action.payload
       }
    });
+  },
 
- }
+  ForwardEngineer:(state,action)=>{
+    state.Nodes = action.payload.nodes;
+    state.Edges = action.payload.edges;
+  }
 
 
 
@@ -590,6 +594,6 @@ const node = createSlice({
 
 export default node.reducer;
     
-export  const {NodeElementHideRedux,SchemaElementSuffle} = node.actions
+export  const {NodeElementHideRedux,SchemaElementSuffle,ForwardEngineer} = node.actions
 
 

@@ -5,7 +5,7 @@ import App from './App';
 import {Provider} from "react-redux"
 import {configureStore, applyMiddleware} from "@reduxjs/toolkit"
  import nodeReducer from "./reactflow/nodereducer/nodeSlice"
- import { BrowserRouter, createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom"
+ import { BrowserRouter,  createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom"
 import Flow from './reactflow/flow';
 import Dashboard from './dashboard/dashboard';
 import Homepage from './homepage/components/homepage';
@@ -41,11 +41,11 @@ const PUBLISHABLE_KEY = "pk_test_d2lzZS1qYXktNDYuY2xlcmsuYWNjb3VudHMuZGV2JA"
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+
    <Provider  store={ store}>
  <RouterProvider router={router}></RouterProvider>
    </Provider>
-   </ClerkProvider>
+
  
   </React.StrictMode>
 );

@@ -8,7 +8,8 @@ module.exports = {
         'Dam-sans':['DM Sans', 'sans-serif'],
         'Inter':["Inter", 'sans-serif'],
         'Open-Sans':["Open Sans", 'sans-serif'],
-        'firo-mono' :["Fira Mono", 'monospace']
+        'firo-mono' :["Fira Mono", 'monospace'],
+        'mono': ['"Fira Mono"', 'monospace']
       },
       colors:{
         grey_0:"#FFFFFF",
