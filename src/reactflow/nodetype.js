@@ -179,7 +179,7 @@ import NodeElementpopup from './nodeElementpopup/nodeElementpopup';
 
 function CustomNode({ id,data ,isConnectable}) {
 
- 
+
 
 
   const newnodes = useNodes();
@@ -197,6 +197,7 @@ const dispatch = useDispatch()
     e.stopPropagation();
     dispatch(datashow(true));
     dispatch(nodesdatashow(id));
+    console.log(e.target.parentElement);
   
     
   }
@@ -251,6 +252,9 @@ function SchemaElementDrag(e){
   console.log(e.target.value)
   console.log("helo")
 }
+function hover(){
+  console.log("helo")
+}
   
   return (
    
@@ -261,7 +265,7 @@ function SchemaElementDrag(e){
     {/* // <div className="min-w-[170px] min-h-[70px]  max-w-[400px]  px-3 py-2 h-auto shadow-lg rounded-md   bg-white text-[15px]"  onClick={tester}> */}
 
     
-    <div className="min-w-[180px] h-auto   shadow-lg rounded-sm  bg-collection_black "  onClick={tester}>
+    <div className="min-w-[180px] h-auto   shadow-lg rounded-md border-[1px] border-solid border-border_color  bg-collection_black "  onClick={tester}>
 
  <div className=' relative transition-all z-50' id='NodeElementpopup'>
  {
@@ -283,11 +287,10 @@ function SchemaElementDrag(e){
      
        return( 
         
-        
-       <div  className=' flex w-full justify-between  gap-3 h-8 px-2 pt-2 font-firo-mono text-[13px]  font-medium  relative' key={i} >
-        <Handle type='source' position={Position.Right} id={`${value.key}-right`} style={{visibility:"hidden"}} />
+        <div  className=' flex w-full justify-between  gap-3 h-8 px-2 pt-2 font-firo-mono text-[13px]  font-medium  relative  hover:`${hover}`  '  key={i} >
+      <Handle type='source' position={Position.Right} id={`${value.key}-right`} style={{visibility:"hidden"}} />
     
-        <div className= '    text-white font-medium'>{value.key}</div>
+        <div className=' text-white font-medium'>{value.key}</div>
     {
       (()=>{
   if(value.value==="String"){
@@ -377,7 +380,7 @@ function SchemaElementDrag(e){
 
   
 
-<div style={{visibility:"visible"}}>
+<div style={{visibility:"hidden"}}>
  <Handle type="source" position={Position.Top}   id="a" />
        <Handle type="source" position={Position.Right}  id="b" />
       <Handle type="source" position={Position.Bottom}  id="c" /> 

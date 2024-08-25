@@ -565,9 +565,11 @@ const node = createSlice({
 
         builder.addCase(NodeElementpopupClose.fulfilled, (state,action)=>{
             state.Nodes.forEach((node)=>{
-                if(node.id === action.payload){
-                    node.data.NodeElementpopup = false
-                }
+                // if(node.id === action.payload){
+                //     node.data.NodeElementpopup = false
+                // }
+
+                node.data.NodeElementpopup = false
             })
         })
 

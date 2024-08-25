@@ -14,24 +14,40 @@ function Anyliser(){
 
     const Anylisershow = useSelector((state)=> state.nodes.Anyliser);
    
-   
     const dispatch = useDispatch()
     const NewschemaNode = useSelector((state)=> state.nodes.NodeData);
    
     
     let [color, setColor] = useState();
+    const [ObjData, setObjData] = useState();
    
 
-    useEffect(()=>{
+
+ 
+     useEffect(()=>{
       
       if(NewschemaNode){
      setColor(NewschemaNode[0].data.color)
  
       }
-    },[NewschemaNode])
+
+      function handleKey(e){
+      if(e.key ==="Enter"){
+        AddSubmit()
+      }
+      }
+
+      window.addEventListener("keydown", handleKey)
+
+      return()=>{
+        window.removeEventListener("keydown", handleKey)
+      }
 
   
-   const [ObjData, setObjData] = useState();
+    },[ObjData])
+
+  
+
    
  const [drag,setDrag]= useState();
 
@@ -50,6 +66,8 @@ function Anyliser(){
 
 
     }
+    
+  
 
     function  DeleteNodeData(id){
       dispatch(DeleteNodeValue({Nodeid:id.Nodeid, NodeDataId:id.NodeDataId}));

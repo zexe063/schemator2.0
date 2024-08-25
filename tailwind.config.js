@@ -23,7 +23,7 @@ module.exports = {
          grey_400_secondary :"#e5e7eb",
          grey_1700: "#1717117",
          grey_1700_secondary:"#4b5563",
-         background_black:"#111827",
+         popup_background_black:"#111827",
          dashboard_background:"rgba(255,255,255,0.25)",
          dashboard_background_shadow:"rgba(0,0,0,0.05)",
          dashboard_color:"rgba(23,23,23,0.2)",
