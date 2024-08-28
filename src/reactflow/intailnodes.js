@@ -102,15 +102,15 @@ import { Position } from "reactflow";
 
 
     
-    // { id:"4",sourcePosition: 'right',
-    // targetPosition: 'left', type:"custom",position:{x:1, y:200},data:{id:"4", color:"#21a935",  icon:<MdSubscriptions /> ,label: "Subscription", arr:[
+    { id:"4",sourcePosition: 'right',
+    targetPosition: 'left', type:"custom",position:{x:1, y:200},data:{id:"4", color:"#21a935",  icon:<MdSubscriptions /> ,label: "Subscription", arr:[
   
-    //   { id: 1,key:"subscription", value:"Boolen"},
-    //   {id: 2 ,key:"timestamp", value:"DateTime"},
-    //   {id: 3 ,key:"account_id", value:"Id"},
-    //   {id: 4,key:"account_name", value:"String"}
+      { id: 1,key:"subscription", value:"Boolen"},
+      {id: 2 ,key:"timestamp", value:"DateTime"},
+      {id: 3 ,key:"account_id", value:"Id"},
+      {id: 4,key:"account_name", value:"String"}
   
-    // ]}},
+    ]}},
 
     
   

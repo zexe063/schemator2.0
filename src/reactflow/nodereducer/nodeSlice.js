@@ -258,7 +258,9 @@ export const NodeElementpopupClose = createAsyncThunk(
   };
 
   const result = getLayoutedElements(data.data.nodes, data.data.edges);
-return result; 
+
+return result;
+ 
             // return data.data
         }
     )
@@ -525,6 +527,8 @@ const node = createSlice({
           })
         })
 
+
+        
         
       
             
@@ -575,6 +579,7 @@ const node = createSlice({
 
         builder.addCase(AiSchemaGenerator.fulfilled, (state,action)=>{
             state.Nodes = action.payload.nodes;
+            console.log(action.payload.edges)
             state.Edges = action.payload.edges;
             // console.log(action.payload)
         })
