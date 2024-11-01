@@ -113,9 +113,6 @@ console.log(firstElement,secondElement)
 const result = NewschemaNode.map((item)=>{
   const arr = item.data.arr;
   const finalarr = [...arr];
-
-    // finalarr[firstElement] = item.data.arr[secondElement];
-    // finalarr[secondElement] = item.data.arr[firstElement];
     finalarr[firstElement] = dataover;
     finalarr[secondElement] = drag;
    return finalarr;
@@ -182,8 +179,8 @@ dispatch(SchemaElementSuffle(...result))
   
                               <input type="text" placeholder="key"  title="key" className=" w-auto bg-transparent border-[1px] border-solid border-border_color p-[1px] pl-1 text-[13px]"onChange={valuegenerate}></input>
                             
-                                       <select className=" bg-background_black text-[11px] text-input_text_color" title="value" defaultValue="String" onClick={valuegenerate} >
-                                          <option value="String">String</option>
+                <select className=" bg-background_black text-[11px] text-input_text_color" title="value" defaultValue="String" onClick={valuegenerate} >
+                  <option value="String">String</option>
                                           <option value="Number">Number</option>
                                           <option value="Boolean">Boolean</option>
                                           <option value="Array">Array</option>

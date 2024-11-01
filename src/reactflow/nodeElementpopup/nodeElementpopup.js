@@ -44,7 +44,7 @@ return ()=>{
     return(
        
             
-        <div className=' absolute left-[-120px]   w-[110px]  top-[-5px] bg-collection_black rounded-md  shadow-md border-[1px] border-solid border-border_color font-firo-mono text-[8px] p-2  transition-all  z-40' onClick={(e)=>e.stopPropagation()}>
+        <div className=' absolute left-[-120px]   w-[110px]  top-[-5px] bg-collection_black rounded-md  shadow-md border-[1px] border-solid border-border_color text-[8px] p-2  transition-all  z-40' onClick={(e)=>e.stopPropagation()}>
             <div className="  absolute right-[-15px]"><FaCaretRight size="20" color="rgb(55, 52, 73)"></FaCaretRight></div>
        <ul  className=" flex flex-col  h-full  gap-3 text-white ">
 
@@ -53,7 +53,7 @@ return ()=>{
 {
   PopElement.map((item,i)=>{
     return(
-      <li className=" flex justify-between w-full cursor-pointer" key={i} onClick={(e)=> {e.stopPropagation()
+      <li className=" flex justify-between w-full font-Inter cursor-pointer" key={i} onClick={(e)=> {e.stopPropagation()
         if(item.name=== "Duplicate"){
           dispatch(NodeDuplicate(id))
           dispatch(NodeElementpopupClose())

@@ -8,7 +8,10 @@ import axios from "axios";
 import { ConnectionLineType } from "reactflow";
 import dagre from "dagre"
 import { CiBowlNoodles } from "react-icons/ci";
-
+import { IoCheckmarkCircleOutline,IoWarningOutline } from "react-icons/io5";
+import toast  from "react-hot-toast";
+import DialogBox from "../dialogbox/dialogbox";
+import { BiBuilding } from "react-icons/bi";
 
 export const setNode = createAsyncThunk(
     "node/onNodeChnage",
@@ -125,8 +128,8 @@ export const nodepopup = createAsyncThunk(
 
 export const SchemaConverter = createAsyncThunk(
     "node/SchemaConverter",
-    async(data)=>{
-        
+    async(data,dispatch)=>{
+     
         const schemparser  =  await axios.post("http://localhost:9000/erdiagram",{
             schemaurl:data
           });
@@ -204,9 +207,29 @@ export const NodeElementpopupClose = createAsyncThunk(
 
     export const AiSchemaGenerator = createAsyncThunk(
         "/node/AiSchemaGenerator",
-        async()=>{
-            const data = await axios.post("http://localhost:9000/newdiagram");
-            console.log(data)
+        async(promptdata)=>{
+            const data = await axios.post("http://localhost:9000/newdiagram",{
+              prompt:promptdata
+            });
+      if(data.status == 200){
+       
+        toast("Schema Generated Successfully",{
+          icon:<IoCheckmarkCircleOutline color='#1fd8a4' size={15} />,
+          position:"bottom-right",
+          style:{
+            background:"#0b3b2c",
+            border:"1px solid #1b6745",
+            color:"#1fd8a4",
+            
+          fontFamily:"Inter",
+          fontSize:"12px",
+          fontWeight:"500",
+          
+          },
+          
+         
+         })
+      }    
             
   const getLayoutedElements = (nodes, edges, direction = "TB") => {
     const dagreGraph = new dagre.graphlib.Graph();
@@ -284,7 +307,9 @@ const node = createSlice({
         NodeData : null,
         CopyNode : null,
         RedoNodeData : [],
-        show:true
+        show:true,
+        dialogBox:false,
+        Ailoading:false
       },
       
       reducers:{
@@ -316,7 +341,11 @@ const node = createSlice({
   ForwardEngineer:(state,action)=>{
     state.Nodes = action.payload.nodes;
     state.Edges = action.payload.edges;
-  }
+  },
+
+  dialogBoxRedux:((state,action)=>{
+    state.dialogBox = !state.dialogBox
+  })
 
 
 
@@ -328,8 +357,10 @@ const node = createSlice({
         
         builder.addCase(setNode.fulfilled, (state,action)=>{
          
+          
             // state.NodeId = action.payload.NodeId[0].id;
              state.Nodes = action.payload.data
+             
           })
 
           builder.addCase(setEdges.fulfilled, (state,action)=>{
@@ -576,13 +607,37 @@ const node = createSlice({
                 node.data.NodeElementpopup = false
             })
         })
-
+builder.addCase(AiSchemaGenerator.pending, (state,action)=>{
+        state.Ailoading = !state.Ailoading
+})
         builder.addCase(AiSchemaGenerator.fulfilled, (state,action)=>{
             state.Nodes = action.payload.nodes;
-            console.log(action.payload.edges)
+        
             state.Edges = action.payload.edges;
-            // console.log(action.payload)
+            state.Ailoading = !state.Ailoading
+            state.dialogBox = !state.dialogBox
+  
+
         })
+
+
+         builder.addCase(AiSchemaGenerator.rejected, (state,action)=>{
+          state.Ailoading = !state.Ailoading
+          state.dialogBox = !state.dialogBox
+          toast("Something went wrong",{
+            icon:<IoWarningOutline color='#d81f1f' size={15} />,
+            position:"bottom-right",
+            style:{
+              background:"#3b0b0b",
+              border:"1px solid #671b1b",
+              color:"#d81f1f",
+              fontFamily:"Inter",
+          fontSize:"12px",
+          fontWeight:"500",
+            }
+          })
+            
+         })
 
          builder.addCase(UpdateLabel.fulfilled, (state,action)=>{
      
@@ -601,6 +656,6 @@ const node = createSlice({
 
 export default node.reducer;
     
-export  const {NodeElementHideRedux,SchemaElementSuffle,ForwardEngineer} = node.actions
+export  const {NodeElementHideRedux,SchemaElementSuffle,ForwardEngineer,dialogBoxRedux} = node.actions
 
 

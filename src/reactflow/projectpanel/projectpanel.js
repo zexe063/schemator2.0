@@ -7,6 +7,7 @@ import { HiDotsVertical } from "react-icons/hi";
 import { NodeElementHideRedux } from "../nodereducer/nodeSlice";
 import { useState,useEffect, useRef } from "react";
 import { FaTableCellsLarge } from "react-icons/fa6";
+
 import MonacoEditor from "react-monaco-editor"
 import Editor from "@monaco-editor/react"
 import * as monaco from 'monaco-editor';
@@ -179,7 +180,7 @@ minimap:{enabled:true},
   
   
     return(
-        <div id="project" className=" w-[270px] z-larger h-[calc(100%-50px)] absolute top-[50px]  overflow-y-auto   left-0   shadow-background_black bg-background_black  border-solid border-r-[1px] border-border_color text-white">
+        <div id="project" className=" w-[270px]  h-[calc(100%-50px)] absolute top-[50px]  overflow-y-auto   left-0   shadow-background_black bg-background_black  border-solid border-r-[1px] border-border_color text-white">
           
           <div className=" mt-8 ">
           {
@@ -192,8 +193,8 @@ minimap:{enabled:true},
       <div  id=" porjectfolder" className=" flex   w-full  h-auto pl-3  flex-col  " key={i}>
 
             <div id="folder" className=" transition-all w-full min-h-[30px] 
-               mt-2 max-h-auto text-white font-firo-mono text-[13px] border-t-[1px] border-solid border-border_color cursor-pointer" >
-              <div className=" flex gap-2 w-full items-center text-center mt-1"  key={i}  onClick={(e)=>toggleFolder(diagram.name)}> 
+               mt-2 max-h-auto text-white  font-Inter text-[13px] border-t-[1px] border-solid border-border_color cursor-pointer" >
+              <div className=" flex gap-2 w-full items-center tracking-tight font-normal text-center mt-1"  key={i}  onClick={(e)=>toggleFolder(diagram.name)}> 
          <span>{open[diagram.name] ? <IoIosArrowDown></IoIosArrowDown>  : <IoIosArrowForward></IoIosArrowForward>}</span>
          <span> <SiFiles></SiFiles></span>
         <span> 

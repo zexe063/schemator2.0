@@ -1,12 +1,11 @@
 
 
 import { useState,useCallback,useMemo, useEffect, useRef } from 'react';
-import ReactFlow, { Controls, Background, applyNodeChanges,   applyEdgeChanges,addEdge,ConnectionLineType,MarkerType, Position, updateEdge, ConnectionMode, StraightEdge, BackgroundVariant, MiniMap, Panel, useReactFlow, ReactFlowProvider, useViewport, useStore} from 'reactflow';
+import ReactFlow, { Panel, Controls, Background, applyNodeChanges,   applyEdgeChanges,addEdge,ConnectionLineType,MarkerType, Position, updateEdge, ConnectionMode, StraightEdge, BackgroundVariant, MiniMap, useReactFlow, ReactFlowProvider, useViewport, useStore} from 'reactflow';
 import 'reactflow/dist/style.css';
 
 import "./flow.css"
-
-
+import Erdiagrampanel from './ErdiagramPanel/Erdiagrampanel';
 import nodetype from './nodetype';
 import { setNode, AddNewNode, RedoNode,setEdges } from './nodereducer/nodeSlice';
 import { useSelector, useDispatch} from 'react-redux';
@@ -20,11 +19,7 @@ import NodeElementpopup from './nodeElementpopup/nodeElementpopup';
 import ProjectPanel from './projectpanel/projectpanel';
 import dagre from "dagre"
 import { FaSearch, FaSlash } from 'react-icons/fa';
-
-
-
-
-
+import DialogBox from './dialogbox/dialogbox';
 
 
 const edgeTypes = {
@@ -34,63 +29,14 @@ StraightEdge:StarightFloatingEdges,
 };
 
 
-
-
 function Flow() {
  
   const highlight =useRef(null);
-  
- 
-
   const dispatch =  useDispatch()
   const nodes = useSelector((state)=> state.nodes.Nodes);
   const edges  =  useSelector((state)=> state.nodes.Edges);
  const Nodeedgetype = useSelector((state)=>state.nodes.connectionType);
-
-
-
-
-
-
-
- 
-
-  
-
-
-
-//  useEffect(()=>{
-//   hljs.highlightAll(highlight.current);
-// },[layoutedNodes])
-
- let shechmafinalresult  = ''
-  
-// here  the scehma agenerate 
-//   const schema =  nodes.map((item) => {
-   
-      
-//     let value = ''
-//     const schemaLable = item.data.label;
-    
-// const   datatype =  item.data.arr.forEach((nodeitem)=>{
-//        value =  value  + 
-//        `
-//        ${nodeitem.key}: {type: ${nodeitem.value}},
-//        `
-      
-// })   
-
-// const SchemaGenerate = `const ${schemaLable}Schema= new mongoose.schema{(
-//    ${value}
-// )}` 
-
-// return SchemaGenerate;
-
-//   });
-
-  
-
-  
+ const dialogBox = useSelector((state)=>state.nodes.dialogBox)
 
 const nodeTypes = useMemo(
   () => ({
@@ -110,20 +56,10 @@ const onNodesChange =  useCallback((changes)=>{
  
 })
     
-// const  onEdgesChange = useCallback((changes)=>{
-//   setEdges((eds)=> applyEdgeChanges(changes,eds))
-// })
 
-  // here onconnect edge functionality
   const onConnect = useCallback(
     (params) => {
-    
-
      let flowedge;
-
-     
-
-     
      if(ConnectionLineType[Nodeedgetype] === ConnectionLineType.SmoothStep){
    flowedge=  "floating"
      }
@@ -132,16 +68,10 @@ const onNodesChange =  useCallback((changes)=>{
       flowedge=  "StraightEdge"
      }
 
-     
-     
-   
-     
-     
       const edge = addEdge({...params, type:flowedge,style:{strokeWidth:1, stroke:"white" },},edges);
       dispatch(setEdges(edge))
            
     },
-  
     [Nodeedgetype],
   );
 
@@ -203,29 +133,25 @@ function move(event){
   return (
     
    
-     <div className=' flex justify-center items-center'> 
-
-<div>
+     <div id='main-canvas'> 
+ 
+ <div id='nav' className=' absolute top-0 left-0 w-full  z-20'>
 <EdgeLine></EdgeLine>
-</div>
+ </div>
 
-    
-<div>
-  <ProjectPanel></ProjectPanel>
-  </div>
+<div id='dialogBox'>
+ {dialogBox? <DialogBox /> : null}
+</div>
   
 
-  <div   style={{width:"100vw", height:"100vh", position:"relative", top:"50px", left:"0px", overflow:"hidden"}}>
-
-     <ReactFlow style={{width: '100%', height:'100%', backgroundColor:"#1c1e24", } }
-
+  <div   style={{width:"100vw", height:"100vh",}}>
+  <ReactFlow style={{width: '100%', height:'100%', backgroundColor:"#1c1e24",   overflow:"hidden" } }
     onNodesDelete={onNodesDelete}
       onConnect={onConnect} 
       connectionLineType={ConnectionLineType[Nodeedgetype]}
       onNodesChange={onNodesChange}
       nodes={nodes}
       edges={edges}
-
         nodeTypes={nodeTypes}  
         edgeTypes={edgeTypes}
         connectionMode={ConnectionMode.Loose}
@@ -235,37 +161,18 @@ function move(event){
        minZoom={0}
       elevateEdgesOnSelect
       onDragOver={onDragOver}
-         onDrop={onDrop}
-      
-      
-    
-               
+         onDrop={onDrop}  
           >
           
-      
-       {/* <Background /> */}
-
-       
-        {/* <MiniMap></MiniMap> */}
-        <Controls />
-        
+<div className='absolute top-[40px] left-0 '>
+  <Erdiagrampanel></Erdiagrampanel>
+</div>
       </ReactFlow>
       </div>
-      
       <Anyliser></Anyliser>
     </div>
-
-  
- 
-    
-   
-    
-   
   );
 
-
-  
-  
 }
 
 

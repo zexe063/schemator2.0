@@ -8,7 +8,7 @@ function getParams(nodeA, nodeB) {
  
   const horizontalDiff = Math.abs(centerA.x - centerB.x);
   const verticalDiff = Math.abs(centerA.y - centerB.y);
-
+ 
   let position;
 
   // when the horizontal difference between the nodes is bigger, we use Position.Left or Position.Right for the handle

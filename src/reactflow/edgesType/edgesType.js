@@ -1,20 +1,22 @@
 
 
-import Bezier  from "../images/draw.png";
-import Line from "../images/arrow.png";
+
 import { useDispatch, useSelector } from "react-redux";
-import {AiSchemaGenerator, RedoNode, UndoNode, edgetype } from "../nodereducer/nodeSlice";
-import { useEffect, useRef, useState } from "react";
+import {AiSchemaGenerator, RedoNode, UndoNode, edgetype,dialogBoxRedux } from "../nodereducer/nodeSlice";
+import { useEffect,  useState } from "react";
 import { CopyNode } from "../nodereducer/nodeSlice";
-import { TbArrowRotaryStraight } from "react-icons/tb";
+
 import "./edgesType.css";
-import nodetype from "../nodetype";
-import { FaCopy } from "react-icons/fa6";
-import { FaDiceD20, FaPaste } from "react-icons/fa";
-import { IoMdRedo } from "react-icons/io";
-import { CiViewTable } from "react-icons/ci";
 import axios from "axios"
 import { SchemaConverter } from "../nodereducer/nodeSlice";
+import { FaRegPaste } from "react-icons/fa6";
+import { LiaRedoAltSolid } from "react-icons/lia";
+import { AiOutlineRobot } from "react-icons/ai";
+import { MdOutlineArrowRightAlt } from "react-icons/md";
+import { BsDatabaseAdd } from "react-icons/bs";
+import { CiViewTable } from "react-icons/ci";
+
+
 
 function EdgeLine(){
 
@@ -72,59 +74,41 @@ dispatch(SchemaConverter(input.value))
 
 }
 function AiSchema(){
-  dispatch(AiSchemaGenerator())
+  dispatch(dialogBoxRedux())
 }
+
+const iconArr = [
+  {name:"arrow", icon:<MdOutlineArrowRightAlt  size={15} color="white"/>},
+  {name:"table", icon:<CiViewTable size={15} color="white"/>, ondrag:onDragStart},
+  {name:"copy", icon:<FaRegPaste size={15} color="white"/>},
+  {name:"redo", icon:<LiaRedoAltSolid size={15} color="white"/>, onclick:redonewnode},
+  {name:"ai", icon:<AiOutlineRobot size={15} color="white"/>, onclick:AiSchema},
+  {name:"database", icon:<BsDatabaseAdd size={15} color="white"/>},
+]
   
 return (
-    <div className='flex w-full   absolute top-0 left-0  bg-background_black'>
+   
+<nav className=" w-full absolute top-[10px] flex justify-center items-center">
 
-    <div className=' flex w-full gap-7 justify-center items-center h-[50px] shadow-sm  border-[1px] border-solid border-border_color'>
-
- <div className=" cursor-pointer relative" onClick={connectionline}>
-<TbArrowRotaryStraight size="25" color="white"></TbArrowRotaryStraight>
-<span className=" text-white font-Dam-sans  absolute  top-[20px] left-[18px] text-[8px]">L</span>
- </div>
-
- <div className=" text-white cursor-pointer relative" onClick={connectionline}>
- <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
-        <path  d="M 5,22 H 15 V 5 H 25" 
-              fill="none" 
-              stroke="white" 
-              
-              stroke-width="1.5"/>
-      </svg>
-      <span className=" text-white font-Dam-sans  absolute  top-[20px] left-[18px] text-[8px]">S</span>
- </div>
-
-  <div  draggable onDragStart={(event)=>onDragStart(event, "node")}>
-   <div className=" cursor-pointer"><CiViewTable size={25} color="white"></CiViewTable> </div>
+<div className=" z-larger shadow-xl  p-2 pr-4 gap-3 flex justify-center  items-center  bg-background_black  rounded-[4px] border-[1px] border-solid border-border_color ">
+  {
+    iconArr.map((item)=>{
+      return(
+        <div 
+          className="cursor-pointer bg-slate_3 w-[30px] h-[30px] flex justify-center items-center rounded-[4px] " 
+          onClick={item.onclick}
+         draggable="true"
+title={item.name}
+        >
+          {item.icon}
+        </div>
+      )
+    })
+  }
 </div>
+</nav>
 
-<div className=" cursor-pointer relative">
-  <FaPaste size="20px" style={{color:"#9ca8b3"}}></FaPaste>
-  <span className=" text-white font-Dam-sans  absolute  top-[20px] left-[18px] text-[8px]">P</span>
-</div>
-
-{
-  redo ? <div className=" cursor-pointer  relative"><IoMdRedo style={{color:"#0041D0"}} onClick={redonewnode} ></IoMdRedo><span className=" text-white font-Dam-sans  absolute  top-[20px] left-[18px] text-[8px]">L</span></div> :
-
-  <div className=" cursor-pointer relative"><IoMdRedo style={{color:"#9ca8b3"}} size="25px"></IoMdRedo> <span className=" text-white font-Dam-sans  absolute  top-[20px] left-[18px] text-[8px]">R</span></div>
-}
-
-<div>
-  <input type="text" placeholder="Enter Schema" id="schemastring"></input>
-  <button className="w-[80px] h-[20px]  bg-blue-700  rounded-sm" onClick={connectschema}>connect</button>
-</div>
-
-<div>
- 
-  <button className="w-[80px] h-[20px]  bg-blue-700  rounded-sm" onClick={AiSchema}>ai</button>
-</div>
-</div>
-
-
-
-    </div>
+   
 
 )
 

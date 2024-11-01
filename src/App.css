@@ -5,6 +5,20 @@
     border-radius: 50%;
     background-color: black;
   }
+
+ 
+  .react-flow__node.selected{
+    border: 1px solid #03a9f4;
+    border-radius: 4px;
+    /* transition: all 0.1s ease-in-out; */
+  }
+  .react-flow__edge.selected{
+    border: 1px solid #03a9f4;
+ 
+    /* transition: all 0.1s ease-in-out; */
+  }
+
+ 
 #active{
   background-color: #edeef1;
   border-radius: 5px;

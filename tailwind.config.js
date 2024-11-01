@@ -19,7 +19,9 @@ module.exports = {
          grey_300: "#f6f6f6",
          grey_400 : "f1f1f1",
          blue_primary : "#2866df",
-         blue_secondary:"#4f46e5",
+        blue_background:"#0b1f3b",
+         blue_border:"#1745b6",
+         blue_color:"#1fa4d8",
          grey_400_secondary :"#e5e7eb",
          grey_1700: "#1717117",
          grey_1700_secondary:"#4b5563",
@@ -46,7 +48,10 @@ module.exports = {
         design_color:"#DDCCFF",
         Ai_color:"#244b33",
         forward_color:"#FB4B87",
-        Homepage_text_color:"E8E8E8"
+        Homepage_text_color:"E8E8E8",
+        slate_3:"#ddeaf814",
+        slate_4:"#2a2b2b"
+        
 
      
          
